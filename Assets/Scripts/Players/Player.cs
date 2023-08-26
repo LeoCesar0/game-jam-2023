@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        attackSpawn = GameObject.Find("AttackSpawn");
+        attackSpawn = GameObject.FindWithTag("AttackSpawn");
     }
 
     // Update is called once per frame

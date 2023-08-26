@@ -6,10 +6,16 @@ public class PlayerHitbox : MonoBehaviour
 {
     private int attackDamage;
     private float knockbackForce = 100f;
+    private float lifeTime = 0.5f;
 
     public void SetAttackDamage(int attackDamage)
     {
         this.attackDamage = attackDamage;
+    }
+
+    void Start()
+    {
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter(Collision other)

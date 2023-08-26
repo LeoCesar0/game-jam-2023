@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         stats.attackDamage = attackDamage;
         stats.attackCooldown = 1.2f;
 
-        attackSpawn = GameObject.Find("AttackSpawn");
+        attackSpawn = GameObject.FindWithTag("AttackSpawn");
     }
 
     // Update is called once per frame
@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
+        Debug.Log("Enemy: Attack");
+        
         stats.isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);

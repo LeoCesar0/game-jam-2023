@@ -18,6 +18,7 @@ public class BaseStats
 
     public bool TakeDamage(int amount)
     {
+        Debug.Log("TOOK DAMAGE " + amount);
         hp -= amount;
         if (hp <= 0)
         {

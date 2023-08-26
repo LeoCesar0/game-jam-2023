@@ -7,7 +7,6 @@ public class Crystal : MonoBehaviour
 
     public int hp = 200;
 
-
     void Update()
     {
         if (hp <= 0)

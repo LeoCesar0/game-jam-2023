@@ -6,10 +6,16 @@ public class EnemyHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     private int attackDamage;
+    private float lifeTime = 0.5f;
 
     public void SetAttackDamage(int attackDamage)
     {
         this.attackDamage = attackDamage;
+    }
+
+    void Start()
+    {
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter(Collision other)
