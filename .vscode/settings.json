@@ -57,5 +57,10 @@
         "temp/":true,
         "Temp/":true
     },
+<<<<<<< HEAD
     "omnisharp.enableRoslynAnalyzers": true
+=======
+    "omnisharp.enableRoslynAnalyzers": true,
+    "dotnet.defaultSolution": "Defend the Crystal.sln"
+>>>>>>> e72cf0be4ffa2ed47b15103541f24d7eff52168f
 }
