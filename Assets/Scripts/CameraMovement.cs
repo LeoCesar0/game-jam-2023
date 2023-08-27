@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     private GameObject engineer;
+    public float yOffset;
     void Start()
     {
         engineer = FindObjectOfType<Engineer>().gameObject;
@@ -14,7 +15,8 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         float x = engineer.transform.position.x;
-        float y = engineer.transform.position.y;
+        float y = engineer.transform.position.y + yOffset;
+
         transform.position = new Vector3(x, y, transform.position.z);
     }
 }
