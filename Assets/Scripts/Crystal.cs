@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Crystal : MonoBehaviour
 {
@@ -15,7 +16,19 @@ public class Crystal : MonoBehaviour
         }
     }
 
-    void EndGame(){
-        Debug.Log("GAME OVER");
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            OnDie();
+        }
     }
+
+    public void OnDie()
+    {
+        LevelManager.Instance.EndGame();
+        Destroy(gameObject);
+    }
+
 }
