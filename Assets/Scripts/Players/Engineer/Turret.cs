@@ -6,15 +6,17 @@ public class Turret : MonoBehaviour
 {
     private GameObject attackSpawn;
     public GameObject bulletPrefab;
-    private int attackDamage = 25;
-    public float attackRange = 12f;
-    private float attackRate = 0.6f;
+    private int attackDamage = 100;
+    public float attackRange = 20f;
+    private float attackRate = 0.5f;
     private float attackSpeedTimer = 0f;
     public GameObject target;
     TurretAttackRange turretAttackRange;
     public int level = 1;
 
     public int kills = 0;
+
+    public int hp = 150;
 
     private Animator animator;
 
@@ -52,16 +54,18 @@ public class Turret : MonoBehaviour
 
         if (level == 2)
         {
-            attackDamage = 60;
+            attackDamage += 60;
             attackRate = 0.2f;
             attackRange += 8;
+            hp = 200;
         }
 
         if (level == 3)
         {
             attackRange += 8;
-            attackDamage = 60;
+            attackDamage += 60;
             attackRate = 0.5f;
+            hp = 300;
         }
 
         animator.SetInteger("Level", level);
@@ -110,6 +114,20 @@ public class Turret : MonoBehaviour
         {
             LevelUp();
         }
+    }
+
+    public void OnDie()
+    {
+        Destroy(gameObject);
+    }
+
+    public bool TakeDamage(int damage){
+        hp -= damage;
+        if(hp <= 0){
+            OnDie();
+            return true;
+        }
+        return false;
     }
 
     public void Attack()

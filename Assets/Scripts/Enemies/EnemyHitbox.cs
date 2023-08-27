@@ -21,6 +21,7 @@ public class EnemyHitbox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Player player = other.gameObject.GetComponent<Player>();
         Crystal crystal = other.gameObject.GetComponent<Crystal>();
+        Turret turret = other.gameObject.GetComponent<Turret>();
 
         if(crystal != null){
             crystal.TakeDamage(attackDamage);
@@ -34,6 +35,10 @@ public class EnemyHitbox : MonoBehaviour
             {
                 player.OnDie();
             }
+        }
+        if (turret != null)
+        {
+            turret.TakeDamage(attackDamage);
         }
     }
 

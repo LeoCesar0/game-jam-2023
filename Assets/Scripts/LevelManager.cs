@@ -37,10 +37,8 @@ public class LevelManager : MonoBehaviour
 
     public int currentLevel = 1;
     public float initialSpawnTimer = 10f;
-    public float spawnTimer = 10f;
+    public float spawnTimer = 25f;
     public List<EnemySpawn> spawns = new List<EnemySpawn>();
-
-
 
     void Update()
     {

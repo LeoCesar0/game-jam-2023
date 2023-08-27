@@ -92,6 +92,7 @@ public class Enemy : MonoBehaviour
     {
         Player player = other.gameObject.GetComponent<Player>();
         Crystal crystal = other.gameObject.GetComponent<Crystal>();
+        Turret turret = other.gameObject.GetComponent<Turret>();
 
         if (crystal != null)
         {
@@ -105,6 +106,15 @@ public class Enemy : MonoBehaviour
             if (attackTarget == null)
             {
                 attackTarget = other.gameObject;
+                return;
+            }
+        }
+        if (turret != null)
+        {
+            if (attackTarget == null)
+            {
+                attackTarget = other.gameObject;
+                return;
             }
         }
     }

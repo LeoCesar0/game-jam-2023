@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
     void Start()
     {
         LevelManager.Instance.spawns.Add(this);
-        StartCoroutine(SpawnEnemies());
+        // StartCoroutine(SpawnEnemies());
     }
 
     // Update is called once per frame
@@ -25,10 +25,11 @@ public class EnemySpawn : MonoBehaviour
     {
         for (int i = 0; i < enemiesNumber; i++)
         {
+            Debug.Log("Spawning n enemies: "+enemiesNumber);
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnRate);
         }
-        enemiesNumber = enemiesNumber + 3;
+        enemiesNumber += + 3;
     }
 
     public void OnDestroy()

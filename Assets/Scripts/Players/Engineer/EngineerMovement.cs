@@ -22,7 +22,7 @@ public class EngineerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         float hAxis = 0;
@@ -47,7 +47,6 @@ public class EngineerMovement : MonoBehaviour
         else 
         {
             animator.SetBool("Run", false);
-            //esta parado
         }
 
       
