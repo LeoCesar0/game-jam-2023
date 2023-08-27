@@ -83,20 +83,23 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        Player player = other.gameObject.GetComponent<Player>();
-        // If the other object has a BaseStats component
-        if (player != null)
+        if (attackTarget == other.gameObject)
         {
-            if (attackTarget == other.gameObject)
-            {
-                attackTarget = null;
-            }
+            attackTarget = null;
         }
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
         Player player = other.gameObject.GetComponent<Player>();
+        Crystal crystal = other.gameObject.GetComponent<Crystal>();
+
+        if (crystal != null)
+        {
+            attackTarget = other.gameObject;
+            return;
+        }
+
         // If the other object has a BaseStats component
         if (player != null)
         {

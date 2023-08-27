@@ -16,10 +16,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
-    public void OnDie(){
+    public void OnDie()
+    {
+        LevelManager.Instance.EndGame();
         Destroy(gameObject);
     }
 
@@ -29,7 +31,5 @@ public class Player : MonoBehaviour
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
 
-        // yield return new WaitForSeconds(stats.attackCooldown);
-        // stats.isAttacking = false;
     }
 }

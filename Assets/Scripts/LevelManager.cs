@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -65,5 +66,17 @@ public class LevelManager : MonoBehaviour
             spawn.SpawnEnemies();
         }
     }
+
+    public void EndGame()
+    {
+        StartCoroutine("ResetScene");
+    }
+
+     public IEnumerator ResetScene()
+    {
+        Debug.Log("START RESET SCENE");
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    } 
 
 }

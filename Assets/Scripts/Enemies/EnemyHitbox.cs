@@ -18,15 +18,17 @@ public class EnemyHitbox : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        // Detect collision with layer Players
-        // Get the BaseStats component of the other object
+    private void OnTriggerEnter2D(Collider2D other) {
         Player player = other.gameObject.GetComponent<Player>();
+        Crystal crystal = other.gameObject.GetComponent<Crystal>();
+
+        if(crystal != null){
+            crystal.TakeDamage(attackDamage);
+        }
         // If the other object has a BaseStats component
         if (player != null)
         {
-            Debug.Log("EnemyHitbox: hit");
+            // Debug.Log("EnemyHitbox: hit");
             bool isDead = player.stats.TakeDamage(attackDamage);
 
             if (isDead)
@@ -35,4 +37,5 @@ public class EnemyHitbox : MonoBehaviour
             }
         }
     }
+
 }
