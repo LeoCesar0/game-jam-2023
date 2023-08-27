@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator Attack()
     {
-        Debug.Log("Enemy: Attack");
 
         stats.isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);

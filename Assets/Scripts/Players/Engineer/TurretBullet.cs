@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour
 {
-    private float speed = 40f;
+    private float speed = 30f;
     private int attackDamage = 10;
     private Rigidbody2D rb;
 
@@ -13,20 +13,35 @@ public class TurretBullet : MonoBehaviour
     private float lifeTime = 10f;
     public bool lookingRight = true;
 
-    void Start()
+    private int level = 1;
+
+    private Animator animator;
+
+    public Turret turret;
+
+    public void Setup()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+        animator = GetComponent<Animator>();
 
         Destroy(gameObject, lifeTime);
     }
 
-    // Update is called once per frame
+    public void SetLevel(int level)
+    {
+        this.level = level;
+        animator.SetInteger("Level", level);
+    }
+
     void FixedUpdate()
     {
-        float velocityX = speed * Time.deltaTime * 100;
-        if(!lookingRight){
-            velocityX = velocityX * -1;
+        float currentSpeed = speed;
+        if (level == 2) currentSpeed = speed * 1.5f;
+        float velocityX = currentSpeed * Time.deltaTime * 100;
+        if (!lookingRight)
+        {
+            velocityX *= -1;
         }
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
 
@@ -38,16 +53,19 @@ public class TurretBullet : MonoBehaviour
 
         if (enemy != null)
         {
-            Debug.Log("TurretBullet: Enemy hit");
             bool isDead = enemy.stats.TakeDamage(attackDamage);
 
             if (isDead)
             {
+                if (turret != null)
+                {
+                    Debug.Log("Add Kill");
+                    turret.AddKill(1);
+                }
                 enemy.OnDie();
             }
             else
             {
-                Debug.Log("KNOCKBACK");
                 // Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
                 // Vector2 knockbackDirection = enemyRb.transform.position - transform.position;
                 // enemyRb.AddForce(knockbackDirection * knockbackForce);

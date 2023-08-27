@@ -28,7 +28,6 @@ public class EnemyHitbox : MonoBehaviour
         // If the other object has a BaseStats component
         if (player != null)
         {
-            // Debug.Log("EnemyHitbox: hit");
             bool isDead = player.stats.TakeDamage(attackDamage);
 
             if (isDead)
