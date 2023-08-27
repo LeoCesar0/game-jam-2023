@@ -29,19 +29,18 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Enemy LiFE: " + stats.hp);
 
         HandleAttack();
-        if(stats.isAttacking)
+        if (stats.isAttacking)
         {
-           animator.SetBool("isAttacking", true); 
-        } else {
-        animator.SetBool("isAttacking", false);
-         }
 
-    Debug.Log("stats.isAttacking " + stats.isAttacking);
+            animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
 
-       
     }
 
     public void OnDie()
@@ -63,22 +62,20 @@ public class Enemy : MonoBehaviour
             transform.localScale = new Vector2(lookingAxis, 1);
             stats.isAttacking = true;
             StartCoroutine(Attack());
-            
+
         }
     }
 
     public IEnumerator Attack()
     {
         Debug.Log("Enemy: Attack");
-        
+
         stats.isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
 
-         yield return new WaitForSeconds(1f);
-         stats.isAttacking = false;
-         
-        
+        yield return new WaitForSeconds(1f);
+        stats.isAttacking = false;
 
         // yield return new WaitForSeconds(stats.attackCooldown);
         // stats.isAttacking = false;

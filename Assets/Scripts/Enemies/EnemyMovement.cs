@@ -17,9 +17,8 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        enemy = gameObject.GetComponentInChildren<Enemy>();
+        enemy = GetComponent<Enemy>();
         crystal = FindObjectOfType<Crystal>();
-        Debug.Log("crystal: " + crystal);
     }
 
     // Update is called once per frame
@@ -37,12 +36,6 @@ public class EnemyMovement : MonoBehaviour
         {
             FollowTarget(target);
         }
-    }
-
-
-    void FollowCrystal()
-    {
-        FollowTarget(crystal.gameObject);
     }
 
     void FollowTarget(GameObject gameObject)
