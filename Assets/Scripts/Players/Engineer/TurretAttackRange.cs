@@ -5,11 +5,15 @@ using UnityEngine;
 public class TurretAttackRange : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Turret turret;
+    public Turret turret { get; set; }
+    public CircleCollider2D turretCollider;
     void Start()
     {
         turret = GetComponentInParent<Turret>();
+        turretCollider = GetComponent<CircleCollider2D>();
 
+        turretCollider.isTrigger = true;
+        turretCollider.radius = turret.attackRange;
     }
 
     // Update is called once per frame
@@ -22,13 +26,11 @@ public class TurretAttackRange : MonoBehaviour
     {
 
         {
-            Debug.Log("Detect Collision");
             if (turret.target == null)
             {
                 Enemy enemy = other.gameObject.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    Debug.Log("Detect Collision");
 
                     turret.target = other.gameObject;
                 }

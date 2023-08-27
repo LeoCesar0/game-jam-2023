@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-
     private GameObject attackSpawn;
     public GameObject bulletPrefab;
-    private int attackDamage = 20;
-    private float attackRange = 5f;
-    private float attackSpeed = 1f;
+    private int attackDamage = 25;
+    public float attackRange = 12f;
+    private float attackRate = 0.6f;
     private float attackSpeedTimer = 0f;
     public GameObject target;
-    CircleCollider2D rangeCircle;
+    TurretAttackRange turretAttackRange;
+    public int level = 1;
+
+    public int kills = 0;
+
+    private Animator animator;
 
     void Start()
     {
-        rangeCircle = gameObject.AddComponent<CircleCollider2D>();
-        rangeCircle.isTrigger = true;
-        rangeCircle.radius = attackRange;
-
-        // attackSpawn = GameObject.FindWithTag("AttackSpawn");
+        turretAttackRange = GetComponentInChildren<TurretAttackRange>();
         attackSpawn = transform.Find("AttackSpawn").gameObject;
-
+        animator = GetComponent<Animator>();
         // DrawAttackRange();
     }
 
@@ -45,9 +45,32 @@ public class Turret : MonoBehaviour
         }
     }
 
+    public void LevelUp()
+    {
+        level++;
+        level = Mathf.Clamp(level, 1, 3);
+
+        if (level == 2)
+        {
+            attackDamage = 60;
+            attackRate = 0.2f;
+            attackRange += 8;
+        }
+
+        if (level == 3)
+        {
+            attackRange += 8;
+            attackDamage = 60;
+            attackRate = 0.5f;
+        }
+
+        animator.SetInteger("Level", level);
+
+        turretAttackRange.turretCollider.radius = attackRange;
+    }
+
     void LookAtTarget()
     {
-
         Vector2 directionToTarget = target.transform.position - transform.position;
         bool enemyIsToTheRight = directionToTarget.x > 0;
         float lookingAxis = 1;
@@ -61,23 +84,42 @@ public class Turret : MonoBehaviour
     void HandleAttack()
     {
         attackSpeedTimer += Time.deltaTime;
-        if (attackSpeedTimer >= attackSpeed)
+        if (attackSpeedTimer >= attackRate)
         {
+            Debug.Log("FIRE");
             Attack();
             attackSpeedTimer = 0f;
+        }
+        
+        // Attack every attackSpeed seconds
+        // if (Time.time > attackSpeedTimer)
+        // {
+        //     Attack();
+        //     attackSpeedTimer = Time.time + attackSpeed;
+        // }
+    }
+
+    public void AddKill(int count)
+    {
+        kills += count;
+        if (level == 1 && kills >= 10)
+        {
+            LevelUp();
+        }
+        if (level == 2 && kills >= 20)
+        {
+            LevelUp();
         }
     }
 
     public void Attack()
     {
-        Debug.Log("TURRET ATTACK");
         GameObject bulletGO = Instantiate(bulletPrefab, attackSpawn.transform.position, Quaternion.identity);
         TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
+        bullet.Setup();
         bullet.SetAttackDamage(attackDamage);
+        bullet.SetLevel(level);
+        bullet.turret = this;
         bullet.lookingRight = transform.localScale.x > 0;
     }
-    // private void DrawAttackRange()
-    // {
-    //     Gizmos.DrawWireSphere(transform.position, attackRange);
-    // }
 }

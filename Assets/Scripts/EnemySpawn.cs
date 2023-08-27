@@ -28,6 +28,7 @@ public class EnemySpawn : MonoBehaviour
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnRate);
         }
+        enemiesNumber = enemiesNumber + 3;
     }
 
     public void OnDestroy()

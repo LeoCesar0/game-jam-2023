@@ -36,7 +36,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public int currentLevel = 1;
-
     public float initialSpawnTimer = 10f;
     public float spawnTimer = 10f;
     public List<EnemySpawn> spawns = new List<EnemySpawn>();
@@ -45,7 +44,6 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-
         CountDownSpawnTimer();
     }
 
@@ -55,6 +53,7 @@ public class LevelManager : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0)
         {
+            Debug.Log("SPAWNING ENEMIES");
             spawnTimer = initialSpawnTimer;
             SpawnEnemies();
         }
@@ -63,7 +62,7 @@ public class LevelManager : MonoBehaviour
     {
         foreach (EnemySpawn spawn in spawns)
         {
-            spawn.SpawnEnemies();
+            StartCoroutine(spawn.SpawnEnemies());
         }
     }
 
