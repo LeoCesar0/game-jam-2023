@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public GameObject hitBoxPrefab;
     public GameObject attackTarget;
     private GameObject attackSpawn;
+    private Animator animator;
 
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
         stats.maxHp = maxHp;
         stats.attackDamage = attackDamage;
         stats.attackCooldown = 1.2f;
+        animator = GetComponent<Animator>();
 
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
     }
@@ -27,6 +29,16 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         HandleAttack();
+        if(stats.isAttacking)
+        {
+           animator.SetBool("isAttacking", true); 
+        } else {
+        animator.SetBool("isAttacking", false);
+         }
+
+    Debug.Log("stats.isAttacking " + stats.isAttacking);
+
+       
     }
 
     public void OnDie()
@@ -47,17 +59,23 @@ public class Enemy : MonoBehaviour
             }
             transform.localScale = new Vector2(lookingAxis, 1);
             stats.isAttacking = true;
-            Attack();
+            StartCoroutine(Attack());
+            
         }
     }
 
-    public void Attack()
+    public IEnumerator Attack()
     {
         Debug.Log("Enemy: Attack");
         
         stats.isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
+
+         yield return new WaitForSeconds(1f);
+         stats.isAttacking = false;
+         
+        
 
         // yield return new WaitForSeconds(stats.attackCooldown);
         // stats.isAttacking = false;
