@@ -11,7 +11,6 @@ public class EngineerMovement : MonoBehaviour
     private Animator animator;
     private Vector2 facingRight;
      private Vector2 facingLeft;
-    // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -26,8 +25,6 @@ public class EngineerMovement : MonoBehaviour
     void Update()
     {
         
-       
-       
         float hAxis = 0;
 
         if (Input.GetKey(KeyCode.LeftArrow))

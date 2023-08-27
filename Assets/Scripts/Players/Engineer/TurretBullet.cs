@@ -4,39 +4,61 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour
 {
-    private float speed = 10f;
+    private float speed = 40f;
+    private int attackDamage = 10;
+    private Rigidbody2D rb;
+
+    private float knockbackForce = 1f;
+
+    private float lifeTime = 10f;
+    public bool lookingRight = true;
 
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
 
+        Destroy(gameObject, lifeTime);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float velocityX = speed * Time.deltaTime * 100;
-        transform.Translate(Vector2.right * velocityX);
+        if(!lookingRight){
+            velocityX = velocityX * -1;
+        }
+        rb.velocity = new Vector2(velocityX, rb.velocity.y);
+
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Detect collision with layer Players
-        // if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
-        // {
-        // }
-        // Get the BaseStats component of the other object
         Enemy enemy = other.gameObject.GetComponent<Enemy>();
 
         if (enemy != null)
         {
             Debug.Log("TurretBullet: Enemy hit");
-            bool isDead = enemy.stats.TakeDamage(50);
+            bool isDead = enemy.stats.TakeDamage(attackDamage);
 
             if (isDead)
             {
                 enemy.OnDie();
             }
+            else
+            {
+                Debug.Log("KNOCKBACK");
+                // Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
+                // Vector2 knockbackDirection = enemyRb.transform.position - transform.position;
+                // enemyRb.AddForce(knockbackDirection * knockbackForce);
+            }
+            Destroy(gameObject);
         }
+    }
+
+    public void SetAttackDamage(int attackDamage)
+    {
+        this.attackDamage = attackDamage;
     }
 
 

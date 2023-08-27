@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
         stats.maxHp = maxHp;
         stats.attackDamage = attackDamage;
         stats.attackCooldown = 1.2f;
+        stats.hp = maxHp;
 
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
     }
@@ -26,6 +27,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Enemy LiFE: " + stats.hp);
+
         HandleAttack();
     }
 

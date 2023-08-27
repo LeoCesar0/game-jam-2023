@@ -8,11 +8,12 @@ public class Engineer : Player
     public GameObject turretPrefab;
     private EngineerMovement movement;
     private bool canSpawnTurret = true;
-    private float turretSpawnCooldown = 5f;
+    private float turretSpawnCooldown = 6f;
 
     void Start()
     {
         stats.maxHp = 200;
+        stats.hp = stats.maxHp;
         stats.attackDamage = 40;
 
         movement = gameObject.GetComponent<EngineerMovement>();
@@ -28,10 +29,8 @@ public class Engineer : Player
     {
         if (Input.GetKeyDown(KeyCode.Keypad2) && canSpawnTurret)
         {
-            Debug.Log("SPAWN TURRET");
             SpawnTurret();
             canSpawnTurret = false;
-            StartCoroutine(ResetSpawnTurret());
         }
     }
 
@@ -44,6 +43,11 @@ public class Engineer : Player
         }
         Vector2 spawnPos = new Vector2(transform.position.x + xOffset, transform.position.y);
         Instantiate(turretPrefab, spawnPos, Quaternion.identity);
+    }
+
+    public void OnTurretDestroyed()
+    {
+        StartCoroutine(ResetSpawnTurret());
     }
 
     IEnumerator ResetSpawnTurret()
