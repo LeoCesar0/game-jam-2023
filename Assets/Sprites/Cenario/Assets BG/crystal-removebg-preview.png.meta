@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 225a01caf7960574a90c9556479640f3
+guid: 8f43d660065700547a119c437e119f5e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wheels&hydrant_0
+      name: crystal-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 696
-        y: 232
-        width: 196
-        height: 244
+        x: 57
+        y: 38
+        width: 103
+        height: 152
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b3f889d4113d0438de78f5d81e1cc9
-      internalID: -781337572
+      spriteID: 4f11af1b9becea6419085ba82cf21cad
+      internalID: -1467764022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wheels&hydrant_1
+      name: crystal-removebg-preview_1
       rect:
         serializedVersion: 2
-        x: 1316
-        y: 180
-        width: 556
-        height: 408
+        x: 244
+        y: 35
+        width: 125
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bbc8f6cdff275049bea957e29b13a82
-      internalID: 1888016887
+      spriteID: b65300b2129c8534da096627019a6ff1
+      internalID: -276200305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crystal-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 31
+        width: 171
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f84014b036e304ea04badf28ca12f3
+      internalID: -1468523413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crystal-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 31
+        width: 215
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 811126f242e93af42808f20f309d0ebb
+      internalID: 1749730581
       vertices: []
       indices: 
       edges: []
@@ -175,8 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wheels&hydrant_0: -781337572
-      wheels&hydrant_1: 1888016887
+      crystal-removebg-preview_0: -1467764022
+      crystal-removebg-preview_1: -276200305
+      crystal-removebg-preview_2: -1468523413
+      crystal-removebg-preview_3: 1749730581
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

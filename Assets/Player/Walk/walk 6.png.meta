@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 225a01caf7960574a90c9556479640f3
+guid: de75c358e77dfad48b1081c163a03be3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,49 +121,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: wheels&hydrant_0
-      rect:
-        serializedVersion: 2
-        x: 696
-        y: 232
-        width: 196
-        height: 244
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6b3f889d4113d0438de78f5d81e1cc9
-      internalID: -781337572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wheels&hydrant_1
-      rect:
-        serializedVersion: 2
-        x: 1316
-        y: 180
-        width: 556
-        height: 408
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1bbc8f6cdff275049bea957e29b13a82
-      internalID: 1888016887
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -174,9 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      wheels&hydrant_0: -781337572
-      wheels&hydrant_1: 1888016887
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
