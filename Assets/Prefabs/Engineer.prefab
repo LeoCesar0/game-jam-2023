@@ -44,13 +44,8 @@ GameObject:
   - component: {fileID: 4955219644587480360}
   - component: {fileID: 7009477526004019508}
   - component: {fileID: 7637760289493228358}
-<<<<<<< HEAD
-  - component: {fileID: 1128127181216269386}
-  m_Layer: 6
-=======
   - component: {fileID: 7070374465559496110}
   m_Layer: 0
->>>>>>> izaelle
   m_Name: Engineer
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -211,28 +206,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8593253, y: 2.2998347}
   m_EdgeRadius: 0
-<<<<<<< HEAD
---- !u!114 &1128127181216269386
-MonoBehaviour:
-=======
 --- !u!95 &7070374465559496110
 Animator:
   serializedVersion: 5
->>>>>>> izaelle
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3819145619574774280}
   m_Enabled: 1
-<<<<<<< HEAD
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b87403a1b5c3e48b1898643ed4ea4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitBoxPrefab: {fileID: 5161656287190938810, guid: 9fc372f133afd914eabff594a77818b0, type: 3}
-  turretPrefab: {fileID: 8306816856506591747, guid: d9b1b2ce59cfcc04c9b55b42e22c2e62, type: 3}
-=======
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 55fe00c69f5284e42b3007f23831740a, type: 2}
   m_CullingMode: 0
@@ -245,4 +227,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
->>>>>>> izaelle
