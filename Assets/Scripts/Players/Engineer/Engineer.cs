@@ -3,54 +3,11 @@ using UnityEngine;
 
 public class Engineer : Player
 {
-    public GameObject turretPrefab;
-    private EngineerMovement movement;
-    private bool canSpawnTurret = true;
-    private float turretSpawnCooldown = 6f;
-
     void Start()
     {
         stats.maxHp = 200;
         stats.hp = stats.maxHp;
         stats.attackDamage = 40;
-
-        movement = gameObject.GetComponent<EngineerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        HandleSpawnTurret();
-    }
-
-    private void HandleSpawnTurret()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad2) && canSpawnTurret)
-        {
-            SpawnTurret();
-            canSpawnTurret = false;
-        }
-    }
-
-    public void SpawnTurret()
-    {
-        float xOffset = 0f;
-        if (!movement.lookingRight)
-        {
-            xOffset = xOffset * -1;
-        }
-        Vector2 spawnPos = new Vector2(transform.position.x + xOffset, transform.position.y);
-        Instantiate(turretPrefab, spawnPos, Quaternion.identity);
-    }
-
-    public void OnTurretDestroyed()
-    {
-        StartCoroutine(ResetSpawnTurret());
-    }
-
-    IEnumerator ResetSpawnTurret()
-    {
-        yield return new WaitForSeconds(turretSpawnCooldown);
-        canSpawnTurret = true;
-    }
 }

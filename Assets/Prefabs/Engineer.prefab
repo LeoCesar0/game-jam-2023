@@ -42,10 +42,11 @@ GameObject:
   - component: {fileID: 7827359889782872115}
   - component: {fileID: 591183793540873107}
   - component: {fileID: 4955219644587480360}
+  - component: {fileID: 4478493348554941689}
+  - component: {fileID: -3755376976604865009}
   - component: {fileID: 7009477526004019508}
   - component: {fileID: 7637760289493228358}
   - component: {fileID: 7070374465559496110}
-  - component: {fileID: 4478493348554941689}
   m_Layer: 6
   m_Name: Engineer
   m_TagString: Untagged
@@ -133,8 +134,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a389d7400a96b44c9dc05e8d32dc145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
-  lookingRight: 1
+  speed: 2
+  isLookingRight: 1
+--- !u!114 &4478493348554941689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819145619574774280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b87403a1b5c3e48b1898643ed4ea4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxPrefab: {fileID: 5161656287190938810, guid: 9fc372f133afd914eabff594a77818b0, type: 3}
+--- !u!114 &-3755376976604865009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819145619574774280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78eae1955bd637c4989d5d8efe70e205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretPrefab: {fileID: 8306816856506591747, guid: d9b1b2ce59cfcc04c9b55b42e22c2e62, type: 3}
 --- !u!50 &7009477526004019508
 Rigidbody2D:
   serializedVersion: 4
@@ -228,17 +255,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4478493348554941689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3819145619574774280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b87403a1b5c3e48b1898643ed4ea4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitBoxPrefab: {fileID: 5161656287190938810, guid: 9fc372f133afd914eabff594a77818b0, type: 3}
-  turretPrefab: {fileID: 8306816856506591747, guid: d9b1b2ce59cfcc04c9b55b42e22c2e62, type: 3}

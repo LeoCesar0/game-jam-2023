@@ -9,9 +9,11 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public float speed = 4.8f;
+    public float speed;
 
     private Crystal crystal;
+
+    private GameObject target;
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +27,19 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
 
-        GameObject target = crystal.gameObject;
+        target = crystal.gameObject;
 
         if (enemy.attackTarget != null)
         {
             target = enemy.attackTarget;
         }
 
-        if (!enemy.stats.isAttacking)
+
+    }
+
+    private void FixedUpdate()
+    {
+        if (!enemy.stats.isAttacking && target != null)
         {
             FollowTarget(target);
         }

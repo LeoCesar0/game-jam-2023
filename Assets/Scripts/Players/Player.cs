@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
+        Debug.Log("attackSpawn -->" + attackSpawn);
     }
 
     // Update is called once per frame
@@ -30,6 +31,5 @@ public class Player : MonoBehaviour
         stats.isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
-
     }
 }

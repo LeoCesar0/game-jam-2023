@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    private GameObject attackSpawn;
+
     public GameObject bulletPrefab;
-    private int attackDamage = 100;
     public float attackRange = 20f;
+    public GameObject target;
+    public int level = 1;
+    public int kills = 0;
+    public int hp = 150;
+
+    private AudioSource audioSource;
+    public AudioClip attackSoundWeak;
+    public AudioClip attackSoundStrong;
+
+
+    private GameObject attackSpawn;
+    private int attackDamage = 100;
     private float attackRate = 0.5f;
     private float attackSpeedTimer = 0f;
-    public GameObject target;
     TurretAttackRange turretAttackRange;
-    public int level = 1;
 
-    public int kills = 0;
-
-    public int hp = 150;
 
     private Animator animator;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = attackSoundWeak;
         turretAttackRange = GetComponentInChildren<TurretAttackRange>();
         attackSpawn = transform.Find("AttackSpawn").gameObject;
         animator = GetComponent<Animator>();
@@ -66,6 +74,7 @@ public class Turret : MonoBehaviour
             attackDamage += 60;
             attackRate = 0.5f;
             hp = 300;
+            audioSource.clip = attackSoundStrong;
         }
 
         animator.SetInteger("Level", level);
@@ -94,7 +103,7 @@ public class Turret : MonoBehaviour
             Attack();
             attackSpeedTimer = 0f;
         }
-        
+
         // Attack every attackSpeed seconds
         // if (Time.time > attackSpeedTimer)
         // {
@@ -121,9 +130,11 @@ public class Turret : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool TakeDamage(int damage){
+    public bool TakeDamage(int damage)
+    {
         hp -= damage;
-        if(hp <= 0){
+        if (hp <= 0)
+        {
             OnDie();
             return true;
         }
@@ -139,5 +150,11 @@ public class Turret : MonoBehaviour
         bullet.SetLevel(level);
         bullet.turret = this;
         bullet.lookingRight = transform.localScale.x > 0;
+
+
+        audioSource.PlayOneShot(audioSource.clip);
+        if(level == 2){
+            audioSource.PlayDelayed(0.1f);
+        }
     }
 }

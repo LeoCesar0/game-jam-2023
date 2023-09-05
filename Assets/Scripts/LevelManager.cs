@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+
+    public int currentLevel = 1;
+    public float spawnCooldown = 20f;
+    public float firstSpawnTime = 5f;
+    private float spawnTimer;
+
+    private AudioSource audioSource;
+
+    public List<EnemySpawn> spawns = new List<EnemySpawn>();
     // create a singleton
     private static LevelManager instance;
     public static LevelManager Instance
@@ -24,6 +33,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        spawnTimer = firstSpawnTime;
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -33,12 +43,10 @@ public class LevelManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
-    }
 
-    public int currentLevel = 1;
-    public float initialSpawnTimer = 20f;
-    public float spawnTimer = 25f;
-    public List<EnemySpawn> spawns = new List<EnemySpawn>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = Resources.Load<AudioClip>("Sounds/Game/game-over");
+    }
 
     void Update()
     {
@@ -52,7 +60,7 @@ public class LevelManager : MonoBehaviour
         if (spawnTimer <= 0)
         {
             Debug.Log("SPAWNING ENEMIES");
-            spawnTimer = initialSpawnTimer;
+            spawnTimer = spawnCooldown;
             SpawnEnemies();
         }
     }
@@ -66,14 +74,15 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame()
     {
+        audioSource.Play();
         StartCoroutine("ResetScene");
     }
 
-     public IEnumerator ResetScene()
+    public IEnumerator ResetScene()
     {
         Debug.Log("START RESET SCENE");
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    } 
+    }
 
 }
