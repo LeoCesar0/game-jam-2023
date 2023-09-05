@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour
     public void EndGame()
     {
         audioSource.Play();
-        StartCoroutine("ResetScene");
+        StartCoroutine(ResetScene());
     }
 
     public IEnumerator ResetScene()

@@ -7,15 +7,22 @@ public class EngineerAttack : MonoBehaviour
 
     private bool canSpawnTurret = true;
     private float turretSpawnCooldown = 6f;
-    private EngineerMovement movement;
     public GameObject turretPrefab;
+    private Engineer engineer;
 
     void Start()
     {
-        movement = gameObject.GetComponent<EngineerMovement>();
+        engineer = gameObject.GetComponent<Engineer>();
     }
     void Update()
     {
+
+        if (Input.GetButtonDown("P1Fire1"))
+        {
+            // TODO
+        }
+
+
         HandleSpawnTurret();
     }
 
@@ -31,7 +38,7 @@ public class EngineerAttack : MonoBehaviour
     public void SpawnTurret()
     {
         float xOffset = 0f;
-        if (!movement.isLookingRight)
+        if (!engineer.isLookingRight)
         {
             xOffset *= -1;
         }

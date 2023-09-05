@@ -3178,6 +3178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 879971441089912561, guid: 0237f11fc674e134da680e97315f13a5, type: 3}
+      propertyPath: m_Name
+      value: AttackSpawn
+      objectReference: {fileID: 0}
     - target: {fileID: 3819145619574774280, guid: 0237f11fc674e134da680e97315f13a5, type: 3}
       propertyPath: m_Name
       value: Engineer

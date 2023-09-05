@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3926459331010363108}
   m_Layer: 6
-  m_Name: HitBoxSpawn
+  m_Name: AttackSpawn
   m_TagString: AttackSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  isLookingRight: 1
 --- !u!114 &4478493348554941689
 MonoBehaviour:
   m_ObjectHideFlags: 0

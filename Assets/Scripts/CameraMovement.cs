@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private GameObject engineer;
+    private GameObject player;
     public float yOffset;
     void Start()
     {
-        engineer = FindObjectOfType<Engineer>().gameObject;
+        player = FindObjectOfType<Engineer>().gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = engineer.transform.position.x;
-        float y = engineer.transform.position.y + yOffset;
 
-        transform.position = new Vector3(x, y, transform.position.z);
+        if (player != null)
+        {
+            float x = player.transform.position.x;
+            float y = player.transform.position.y + yOffset;
+
+            transform.position = new Vector3(x, y, transform.position.z);
+        }
+
     }
 }

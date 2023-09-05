@@ -8,15 +8,19 @@ public class EngineerMovement : MonoBehaviour
 {
 
     public float speed;
-    public bool isLookingRight = true;
+    public float CurrentSpeed { get; private set; }
 
     private Rigidbody2D rb;
     private Animator animator;
     private float hAxis = 0;
 
+    private Engineer engineer;
 
     void Start()
     {
+        CurrentSpeed = speed;
+
+        engineer = gameObject.GetComponent<Engineer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -24,13 +28,24 @@ public class EngineerMovement : MonoBehaviour
     void Update()
     {
         hAxis = Input.GetAxisRaw("P1Horizontal");
+
+
+        if (Input.GetButton("P1Run"))
+        {
+            engineer.isRunning = true;
+        }
+        else
+        {
+            engineer.isRunning = false;
+        }
+
         // Input.GetKey(KeyCode.LeftArrow)
         float xLocalScale = transform.localScale.x;
         if (hAxis < 0)
         {
             xLocalScale = Math.Abs(xLocalScale) * -1;
         }
-         if (hAxis > 0)
+        if (hAxis > 0)
         {
             xLocalScale = Math.Abs(xLocalScale);
         }
@@ -39,11 +54,11 @@ public class EngineerMovement : MonoBehaviour
 
         if (xLocalScale < 0)
         {
-            isLookingRight = false;
+            engineer.isLookingRight = false;
         }
         if (xLocalScale > 0)
         {
-            isLookingRight = true;
+            engineer.isLookingRight = true;
         }
         if (hAxis != 0)
         {
@@ -60,7 +75,9 @@ public class EngineerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float velocityX = hAxis * speed * Time.deltaTime * 100;
+        CurrentSpeed = speed;
+        if (engineer.isRunning) CurrentSpeed = speed * 1.8f;
+        float velocityX = hAxis * CurrentSpeed * Time.deltaTime * 100;
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }
 }

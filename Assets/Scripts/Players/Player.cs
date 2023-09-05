@@ -8,6 +8,16 @@ public class Player : MonoBehaviour
     public GameObject hitBoxPrefab;
     private GameObject attackSpawn;
 
+    public bool isAttacking = false;
+
+    public bool isMoving = false;
+
+    public bool isRunning = false;
+
+    public bool isDead = false;
+
+    public bool isLookingRight = false;
+
     void Start()
     {
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
