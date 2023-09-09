@@ -53,7 +53,7 @@ public class TurretBullet : MonoBehaviour
 
         if (enemy != null)
         {
-            bool isDead = enemy.stats.TakeDamage(attackDamage);
+            bool isDead = enemy.TakeDamage(attackDamage);
 
             if (isDead)
             {

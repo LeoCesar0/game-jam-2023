@@ -59,7 +59,6 @@ public class LevelManager : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0)
         {
-            Debug.Log("SPAWNING ENEMIES");
             spawnTimer = spawnCooldown;
             SpawnEnemies();
         }

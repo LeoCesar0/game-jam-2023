@@ -29,7 +29,7 @@ public class EnemyHitbox : MonoBehaviour
         // If the other object has a BaseStats component
         if (player != null)
         {
-            bool isDead = player.stats.TakeDamage(attackDamage);
+            bool isDead = player.TakeDamage(attackDamage);
 
             if (isDead)
             {

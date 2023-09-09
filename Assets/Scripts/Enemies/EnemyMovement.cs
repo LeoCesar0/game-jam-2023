@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!enemy.stats.isAttacking && target != null)
+        if (!enemy.isAttacking && target != null)
         {
             FollowTarget(target);
         }

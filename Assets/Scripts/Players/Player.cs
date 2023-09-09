@@ -2,26 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : BaseCharacter
 {
-    public BaseStats stats = new BaseStats();
     public GameObject hitBoxPrefab;
     private GameObject attackSpawn;
 
-    public bool isAttacking = false;
 
-    public bool isMoving = false;
-
-    public bool isRunning = false;
-
-    public bool isDead = false;
-
-    public bool isLookingRight = false;
-
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
-        Debug.Log("attackSpawn -->" + attackSpawn);
+    }
+
+    public override bool TakeDamage(int damage, GameObject attacker = null)
+    {
+        return base.TakeDamage(damage, attacker);
     }
 
     // Update is called once per frame
@@ -38,8 +33,9 @@ public class Player : MonoBehaviour
 
     public void Attack()
     {
-        stats.isAttacking = true;
+        isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
     }
+
 }

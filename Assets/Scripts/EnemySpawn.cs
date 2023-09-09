@@ -25,7 +25,6 @@ public class EnemySpawn : MonoBehaviour
     {
         for (int i = 0; i < enemiesNumber; i++)
         {
-            Debug.Log("Spawning n enemies: "+enemiesNumber);
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnRate);
         }

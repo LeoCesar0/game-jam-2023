@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AttackSpawn
   - AttackRange
+  - FloatingTextCanvas
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1054536001
+    locked: 0
+  - name: UI
+    uniqueID: 2077723585
     locked: 0

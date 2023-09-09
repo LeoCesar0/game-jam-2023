@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : BaseCharacter
 {
 
-    public BaseStats stats = new BaseStats();
     public int maxHp = 100;
     public int attackDamage = 10;
     public GameObject hitBoxPrefab;
@@ -15,8 +14,9 @@ public class Enemy : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         stats.maxHp = maxHp;
         stats.attackDamage = attackDamage;
         stats.attackCooldown = 1.2f;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     {
 
         HandleAttack();
-        if (stats.isAttacking)
+        if (isAttacking)
         {
 
             animator.SetBool("isAttacking", true);
@@ -43,6 +43,11 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public override bool TakeDamage(int damage, GameObject attacker = null)
+    {
+        return base.TakeDamage(damage, attacker);
+    }
+
     public void OnDie()
     {
         Destroy(gameObject);
@@ -50,7 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void HandleAttack()
     {
-        if (attackTarget != null && stats.isAttacking == false)
+        if (attackTarget != null && isAttacking == false)
         {
             Vector2 directionToTarget = attackTarget.transform.position - transform.position;
             bool enemyIsToTheRight = directionToTarget.x > 0;
@@ -60,7 +65,7 @@ public class Enemy : MonoBehaviour
                 lookingAxis = -1;
             }
             transform.localScale = new Vector2(lookingAxis, 1);
-            stats.isAttacking = true;
+            isAttacking = true;
             StartCoroutine(Attack());
 
         }
@@ -69,12 +74,12 @@ public class Enemy : MonoBehaviour
     public IEnumerator Attack()
     {
 
-        stats.isAttacking = true;
+        isAttacking = true;
         GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
         hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
 
         yield return new WaitForSeconds(1f);
-        stats.isAttacking = false;
+        isAttacking = false;
 
         // yield return new WaitForSeconds(stats.attackCooldown);
         // stats.isAttacking = false;

@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class Engineer : Player
 {
-    void Start()
+    public virtual void Start()
     {
+        base.Start();
+
         stats.maxHp = 200;
         stats.hp = stats.maxHp;
         stats.attackDamage = 40;

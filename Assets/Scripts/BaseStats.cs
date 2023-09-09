@@ -1,30 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseStats
 {
     public int maxHp;
     public int hp;
     public int attackDamage;
-    public bool isDead;
-    public bool isAttacking = false;
     public float attackCooldown = 1f;
 
-    public BaseStats(){
-        hp = maxHp;
-        isDead = false;
-    }
-
-    public bool TakeDamage(int amount)
+    public BaseStats()
     {
-        hp -= amount;
-        if (hp <= 0)
-        {
-            isDead = true;
-            return true;
-        }
-        return false;
+        hp = maxHp;
     }
 
 }
