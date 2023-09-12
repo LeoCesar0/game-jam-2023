@@ -6,23 +6,23 @@ using UnityEngine;
 
 public class EngineerMovement : MonoBehaviour
 {
-
-    public float speed;
-    public float CurrentSpeed { get; private set; }
-
     private Rigidbody2D rb;
     private Animator animator;
     private float hAxis = 0;
-
     private Engineer engineer;
+    private float originalSpeed;
+    private float runSpeedMultiplier = 1.8f;
+    public float Speed { get; private set; }
+
 
     void Start()
     {
-        CurrentSpeed = speed;
-
         engineer = gameObject.GetComponent<Engineer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        originalSpeed = engineer.stats.speed;
+        Speed = engineer.stats.speed;
     }
 
     void Update()
@@ -32,11 +32,11 @@ public class EngineerMovement : MonoBehaviour
 
         if (Input.GetButton("P1Run"))
         {
-            engineer.isRunning = true;
+            engineer.status.isRunning = true;
         }
         else
         {
-            engineer.isRunning = false;
+            engineer.status.isRunning = false;
         }
 
         // Input.GetKey(KeyCode.LeftArrow)
@@ -54,11 +54,11 @@ public class EngineerMovement : MonoBehaviour
 
         if (xLocalScale < 0)
         {
-            engineer.isLookingRight = false;
+            engineer.status.isLookingRight = false;
         }
         if (xLocalScale > 0)
         {
-            engineer.isLookingRight = true;
+            engineer.status.isLookingRight = true;
         }
         if (hAxis != 0)
         {
@@ -71,13 +71,27 @@ public class EngineerMovement : MonoBehaviour
         }
     }
 
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+    IEnumerator ChangeSpeedCoroutine(float speed, float duration)
+    {
+        Speed = speed;
+        yield return new WaitForSeconds(duration);
+        Speed = originalSpeed;
+    }
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        CurrentSpeed = speed;
-        if (engineer.isRunning) CurrentSpeed = speed * 1.8f;
-        float velocityX = hAxis * CurrentSpeed * Time.deltaTime * 100;
+        float currentSpeed = Speed;
+        if (engineer.status.isRunning)
+        {
+            Speed = currentSpeed * runSpeedMultiplier;
+        }
+        float velocityX = hAxis * Speed * Time.deltaTime * 100;
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }
 }

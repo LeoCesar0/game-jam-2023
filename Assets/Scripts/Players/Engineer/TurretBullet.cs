@@ -62,13 +62,12 @@ public class TurretBullet : MonoBehaviour
                     Debug.Log("Add Kill");
                     turret.AddKill(1);
                 }
-                enemy.OnDie();
             }
             else
             {
-                // Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
-                // Vector2 knockbackDirection = enemyRb.transform.position - transform.position;
-                // enemyRb.AddForce(knockbackDirection * knockbackForce);
+                Rigidbody2D enemyRb = other.gameObject.GetComponent<Rigidbody2D>();
+                Vector2 knockbackDirection = enemyRb.transform.position - transform.position;
+                enemyRb.AddForce(knockbackDirection * knockbackForce);
             }
             Destroy(gameObject);
         }
@@ -77,6 +76,21 @@ public class TurretBullet : MonoBehaviour
     public void SetAttackDamage(int attackDamage)
     {
         this.attackDamage = attackDamage;
+    }
+
+
+    public static TurretBullet Create(Vector2 position, Turret owner)
+    {
+        GameObject bulletGO = Instantiate(GamePrefabs.Instance.TurretBullet, position, Quaternion.identity);
+        TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
+        bullet.Setup();
+        bullet.attackDamage = owner.AttackDamage;
+        // bullet.SetAttackDamage(attackDamage);
+        bullet.SetLevel(owner.level);
+        bullet.turret = owner;
+        bullet.lookingRight = owner.transform.localScale.x > 0;
+
+        return bullet;
     }
 
 

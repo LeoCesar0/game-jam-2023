@@ -8,11 +8,13 @@ public class BaseStats
     public int maxHp;
     public int hp;
     public int attackDamage;
-    public float attackCooldown = 1f;
+    public float attackSpeed = 1f;
+    public float speed = 2;
 
-    public BaseStats()
+    public BaseStats(int hp, int attack)
     {
-        hp = maxHp;
+        this.hp = hp;
+        this.maxHp = hp;
+        this.attackDamage = attack;
     }
-
 }

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-
     private Enemy enemy;
-
     private Rigidbody2D rb;
-
-    public float speed;
-
     private Crystal crystal;
-
     private GameObject target;
+    private float originalSpeed;
+    public float Speed { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +17,9 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemy = GetComponent<Enemy>();
         crystal = FindObjectOfType<Crystal>();
+
+        originalSpeed = enemy.stats.speed;
+        Speed = enemy.stats.speed;
     }
 
     // Update is called once per frame
@@ -34,12 +33,11 @@ public class EnemyMovement : MonoBehaviour
             target = enemy.attackTarget;
         }
 
-
     }
 
     private void FixedUpdate()
     {
-        if (!enemy.isAttacking && target != null)
+        if (!enemy.status.isAttacking && target != null)
         {
             FollowTarget(target);
         }
@@ -47,6 +45,8 @@ public class EnemyMovement : MonoBehaviour
 
     void FollowTarget(GameObject gameObject)
     {
+
+
         Vector2 directionToTarget = gameObject.transform.position - transform.position;
         float hAxis = 1;
         if (directionToTarget.x < 0)
@@ -54,13 +54,10 @@ public class EnemyMovement : MonoBehaviour
             hAxis = -1;
         }
 
-        float velocityX = hAxis * speed * 100 * Time.deltaTime;
+        float velocityX = hAxis * Speed * 100 * Time.deltaTime;
 
         rb.velocity = new Vector2(velocityX, rb.velocity.y);
 
-        // Vector2 translate = directionToTarget.normalized * speed * Time.deltaTime * 100;
-        // Debug.Log("translate: " + translate);
-        // transform.Translate(translate);
         FaceGameObject(gameObject);
     }
 
@@ -74,5 +71,16 @@ public class EnemyMovement : MonoBehaviour
             lookingAxis = -1;
         }
         transform.localScale = new Vector2(lookingAxis, 1);
+    }
+
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+    IEnumerator ChangeSpeedCoroutine(float speed, float duration)
+    {
+        Speed = speed;
+        yield return new WaitForSeconds(duration);
+        Speed = originalSpeed;
     }
 }

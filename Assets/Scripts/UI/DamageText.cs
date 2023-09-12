@@ -13,12 +13,7 @@ public class DamageText : MonoBehaviour
 
     private TextMeshPro textMesh;
 
-    public static DamageText Create(Vector2 position, int damage)
-    {
-        DamageText damageText = Instantiate(GamePrefabs.Instance.DamageText, position, Quaternion.identity).GetComponent<DamageText>();
-        damageText.Setup(damage.ToString());
-        return damageText;
-    }
+
 
     private void Awake()
     {
@@ -36,7 +31,7 @@ public class DamageText : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (lifeTimer >= maxLifeTime/2)
+        if (lifeTimer >= maxLifeTime / 2)
         {
             transform.position += new Vector3(xSpeed, ySpeed, 0) * Time.deltaTime;
         }
@@ -51,5 +46,15 @@ public class DamageText : MonoBehaviour
 
 
         lifeTimer -= Time.deltaTime;
+    }
+
+
+    /* --------------------------------- STATIC --------------------------------- */
+
+    public static DamageText Create(Vector2 position, int damage)
+    {
+        DamageText damageText = Instantiate(GamePrefabs.Instance.DamageText, position, Quaternion.identity).GetComponent<DamageText>();
+        damageText.Setup(damage.ToString());
+        return damageText;
     }
 }

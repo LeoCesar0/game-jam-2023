@@ -2,40 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharacter : MonoBehaviour
+public class BaseCharacter : MonoBehaviour, IDamageable
 {
-
-    public BaseStats stats = new BaseStats();
+    public BaseStats stats = new BaseStats(100, 10);
+    public CharacterStatus status = new CharacterStatus();
     GameObject damageTextPrefab;
-    SpriteRenderer renderer;
-
-    public bool isAttacking = false;
-
-    public bool isMoving = false;
-
-    public bool isRunning = false;
-
-    public bool isDead = false;
-
-    public bool isLookingRight = true;
-
-    public bool isJumping = false;
-
-    public bool isGrounded = true;
+    SpriteRenderer spriteRenderer;
 
     protected virtual void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         damageTextPrefab = GamePrefabs.Instance.DamageText;
     }
-
-    public virtual void HandleSetup()
-    {
-        stats.hp = 100;
-        stats.maxHp = 100;
-        stats.attackDamage = 10;
-    }
-
 
     public virtual bool TakeDamage(int damage, GameObject attacker = null)
     {
@@ -43,9 +21,9 @@ public class BaseCharacter : MonoBehaviour
 
         if (damageTextPrefab != null)
         {
-            float offset = renderer.bounds.size.y / 2;
+            float offset = spriteRenderer.bounds.size.y / 2;
             Vector2 position = new Vector2(transform.position.x, transform.position.y + offset);
-            
+
             DamageText.Create(position, damage);
 
             // GameObject damageText = Instantiate(damageTextPrefab, position, Quaternion.identity);
@@ -56,9 +34,17 @@ public class BaseCharacter : MonoBehaviour
 
         if (stats.hp <= 0)
         {
+            OnDie();
             return true;
         }
         return false;
+    }
+
+    protected virtual void OnDie()
+    {
+        status.isDead = true;
+        this.enabled = false;
+        Destroy(gameObject);
     }
 
 }

@@ -7,12 +7,13 @@ public class EngineerAttack : MonoBehaviour
 
     private bool canSpawnTurret = true;
     private float turretSpawnCooldown = 6f;
-    public GameObject turretPrefab;
+    private GameObject turretPrefab;
     private Engineer engineer;
 
     void Start()
     {
         engineer = gameObject.GetComponent<Engineer>();
+        turretPrefab = GamePrefabs.Instance.Turret;
     }
     void Update()
     {
@@ -24,6 +25,10 @@ public class EngineerAttack : MonoBehaviour
 
 
         HandleSpawnTurret();
+    }
+
+    private void BasicAttack(){
+        
     }
 
     private void HandleSpawnTurret()
@@ -38,7 +43,7 @@ public class EngineerAttack : MonoBehaviour
     public void SpawnTurret()
     {
         float xOffset = 0f;
-        if (!engineer.isLookingRight)
+        if (!engineer.status.isLookingRight)
         {
             xOffset *= -1;
         }

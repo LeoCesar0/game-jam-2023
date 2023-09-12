@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class Engineer : Player
 {
-    public virtual void Start()
+    protected override void Start()
     {
         base.Start();
 
-        stats.maxHp = 200;
-        stats.hp = stats.maxHp;
-        stats.attackDamage = 40;
+        stats = new BaseStats(200, 40);
+        stats.attackSpeed = 1.5f;
+        stats.speed = 2f;
     }
-
 }

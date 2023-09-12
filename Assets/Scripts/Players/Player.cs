@@ -19,23 +19,21 @@ public class Player : BaseCharacter
         return base.TakeDamage(damage, attacker);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
-    public void OnDie()
+    protected override void OnDie()
     {
+        status.isDead = true;
+        this.enabled = false;
         LevelManager.Instance.EndGame();
         Destroy(gameObject);
     }
 
     public void Attack()
     {
-        isAttacking = true;
-        GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
-        hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
+        status.isAttacking = true;
+        // GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
+        // hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
+        PlayerHitbox.Create(attackSpawn.transform.position, this);
     }
 
 }

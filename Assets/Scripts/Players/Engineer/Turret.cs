@@ -5,7 +5,6 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
 
-    public GameObject bulletPrefab;
     public float attackRange = 20f;
     public GameObject target;
     public int level = 1;
@@ -16,11 +15,14 @@ public class Turret : MonoBehaviour
     public AudioClip attackSoundWeak;
     public AudioClip attackSoundStrong;
 
-
     private GameObject attackSpawn;
     private int attackDamage = 100;
     private float attackRate = 0.5f;
     private float attackSpeedTimer = 0f;
+
+    public int AttackDamage { get; private set; }
+    public float AttackRate { get; private set; }
+
     TurretAttackRange turretAttackRange;
 
 
@@ -55,7 +57,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    public void LevelUp()
+    private void LevelUp()
     {
         level++;
         level = Mathf.Clamp(level, 1, 3);
@@ -143,18 +145,12 @@ public class Turret : MonoBehaviour
 
     public void Attack()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, attackSpawn.transform.position, Quaternion.identity);
-        TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
-        bullet.Setup();
-        bullet.SetAttackDamage(attackDamage);
-        bullet.SetLevel(level);
-        bullet.turret = this;
-        bullet.lookingRight = transform.localScale.x > 0;
-
+        TurretBullet.Create(attackSpawn.transform.position, this);
 
         audioSource.PlayOneShot(audioSource.clip);
-        if(level == 2){
-            audioSource.PlayDelayed(0.1f);
+        if (level == 2)
+        {
+            audioSource.PlayDelayed(0.075f);
         }
     }
 }

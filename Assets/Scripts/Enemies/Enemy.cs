@@ -1,26 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class Enemy : BaseCharacter
+public class Enemy : BaseCharacter, IAttacker
 {
 
-    public int maxHp = 100;
-    public int attackDamage = 10;
-    public GameObject hitBoxPrefab;
     public GameObject attackTarget;
     private GameObject attackSpawn;
     private Animator animator;
+    public GameObject hitBoxPrefab;
+
+    public int getAttackDamage
+    {
+        get
+        {
+            return stats.attackDamage;
+        }
+    }
 
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        stats.maxHp = maxHp;
-        stats.attackDamage = attackDamage;
-        stats.attackCooldown = 1.2f;
-        stats.hp = maxHp;
+
+        stats = new BaseStats(100, 8);
+        stats.attackSpeed = 1.5f;
+        stats.speed = 2f;
         animator = GetComponent<Animator>();
 
         attackSpawn = GameObject.FindWithTag("AttackSpawn");
@@ -31,7 +38,7 @@ public class Enemy : BaseCharacter
     {
 
         HandleAttack();
-        if (isAttacking)
+        if (status.isAttacking)
         {
 
             animator.SetBool("isAttacking", true);
@@ -48,14 +55,14 @@ public class Enemy : BaseCharacter
         return base.TakeDamage(damage, attacker);
     }
 
-    public void OnDie()
+    protected override void OnDie()
     {
         Destroy(gameObject);
     }
 
     private void HandleAttack()
     {
-        if (attackTarget != null && isAttacking == false)
+        if (attackTarget != null && status.isAttacking == false)
         {
             Vector2 directionToTarget = attackTarget.transform.position - transform.position;
             bool enemyIsToTheRight = directionToTarget.x > 0;
@@ -65,7 +72,7 @@ public class Enemy : BaseCharacter
                 lookingAxis = -1;
             }
             transform.localScale = new Vector2(lookingAxis, 1);
-            isAttacking = true;
+            status.isAttacking = true;
             StartCoroutine(Attack());
 
         }
@@ -74,15 +81,24 @@ public class Enemy : BaseCharacter
     public IEnumerator Attack()
     {
 
-        isAttacking = true;
-        GameObject hitBox = Instantiate(hitBoxPrefab, attackSpawn.transform.position, Quaternion.identity);
-        hitBox.GetComponent<EnemyHitbox>().SetAttackDamage(stats.attackDamage);
+        status.isAttacking = true;
+        // GameObject hitBoxGO = Instantiate(GamePrefabs.Instance.EnemyHitbox, attackSpawn.transform.position, Quaternion.identity);
+        // EnemyHitbox hitbox = hitBoxGO.GetComponent<EnemyHitbox>();
+        EnemyHitbox.Create(attackSpawn.transform.position, this);
+
+        // if (hitbox)
+        // {
+        //     hitbox.SetAttackDamage(stats.attackDamage);
+        // }
+        // else
+        // {
+        //     Debug.Log("Enemy hitbox is null");
+        // }
+
+        // EnemyHitbox.Create(attackSpawn.transform.position, stats.attackDamage);
 
         yield return new WaitForSeconds(1f);
-        isAttacking = false;
-
-        // yield return new WaitForSeconds(stats.attackCooldown);
-        // stats.isAttacking = false;
+        status.isAttacking = false;
     }
 
     private void OnCollisionExit2D(Collision2D other)

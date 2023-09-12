@@ -1,45 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyHitbox : MonoBehaviour
+public class EnemyHitbox : Hitbox<Enemy>
 {
-    // Start is called before the first frame update
-    private int attackDamage;
-    private float lifeTime = 0.5f;
-
-    public void SetAttackDamage(int attackDamage)
+    new public static EnemyHitbox Create(Vector2 position, Enemy owner)
     {
-        this.attackDamage = attackDamage;
+        EnemyHitbox hitbox = Instantiate(GamePrefabs.Instance.EnemyHitbox, position, Quaternion.identity).GetComponent<EnemyHitbox>();
+
+        hitbox.owner = owner;
+
+        return hitbox;
     }
-
-    void Start()
-    {
-        Destroy(gameObject, lifeTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        Player player = other.gameObject.GetComponent<Player>();
-        Crystal crystal = other.gameObject.GetComponent<Crystal>();
-        Turret turret = other.gameObject.GetComponent<Turret>();
-
-        if(crystal != null){
-            crystal.TakeDamage(attackDamage);
-        }
-        // If the other object has a BaseStats component
-        if (player != null)
-        {
-            bool isDead = player.TakeDamage(attackDamage);
-
-            if (isDead)
-            {
-                player.OnDie();
-            }
-        }
-        if (turret != null)
-        {
-            turret.TakeDamage(attackDamage);
-        }
-    }
-
 }
