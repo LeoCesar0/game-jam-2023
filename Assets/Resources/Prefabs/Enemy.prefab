@@ -133,10 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ac5b5ba12c6eb46836a74637cf18bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  attackDamage: 8
-  hitBoxPrefab: {fileID: 1515045126844019006, guid: e544164deaea5be4298039ba348cea3c, type: 3}
   attackTarget: {fileID: 0}
+  hitBoxPrefab: {fileID: 1515045126844019006, guid: e544164deaea5be4298039ba348cea3c, type: 3}
 --- !u!114 &4835097374105576509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9840ef7c0d50db248b115c6371b20e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
 --- !u!61 &9220228227644483060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -182,7 +179,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.36731339}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -193,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.7346268}
   m_EdgeRadius: 0
 --- !u!50 &919181932970364595
 Rigidbody2D:
