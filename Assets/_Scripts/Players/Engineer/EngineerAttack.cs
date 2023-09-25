@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class EngineerAttack : MonoBehaviour
@@ -9,18 +10,20 @@ public class EngineerAttack : MonoBehaviour
     private float turretSpawnCooldown = 6f;
     private GameObject turretPrefab;
     private Engineer engineer;
+    private GameObject attackSpawn;
 
     void Start()
     {
         engineer = gameObject.GetComponent<Engineer>();
         turretPrefab = GamePrefabs.Instance.Turret;
+        attackSpawn =  transform.Find("AttackSpawn").gameObject;
     }
     void Update()
     {
 
         if (Input.GetButtonDown("P1Fire1"))
         {
-            // TODO
+            BasicAttack();
         }
 
 
@@ -28,7 +31,9 @@ public class EngineerAttack : MonoBehaviour
     }
 
     private void BasicAttack(){
-        
+        PlayerHitbox hitbox = PlayerHitbox.Create(attackSpawn.transform.position, engineer);
+
+        engineer.status.isAttacking = true;
     }
 
     private void HandleSpawnTurret()

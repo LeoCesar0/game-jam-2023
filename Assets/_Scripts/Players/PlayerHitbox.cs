@@ -12,5 +12,4 @@ public class PlayerHitbox : Hitbox<Player>
 
         return hitbox;
     }
-
 }

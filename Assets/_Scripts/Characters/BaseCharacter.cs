@@ -8,6 +8,8 @@ public class BaseCharacter : MonoBehaviour, IDamageable
     public CharacterStatus status = new CharacterStatus();
     GameObject damageTextPrefab;
     SpriteRenderer spriteRenderer;
+    List<CharacterType> types = new List<CharacterType>();
+    
 
     protected virtual void Start()
     {

@@ -10,6 +10,8 @@ public class BaseStats
     public int attackDamage;
     public float attackSpeed = 1f;
     public float speed = 2;
+    public float physicalArmor = 0f;
+    public float magicArmor = 0f;
 
     public BaseStats(int hp, int attack)
     {
